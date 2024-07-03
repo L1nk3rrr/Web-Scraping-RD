@@ -1,0 +1,8 @@
+john.doe@example.com
+jane_doe123@domain.org
+support@service.net
+info@company.co.uk
+contact.us@my-website.com
+weird.address+spam@gmail.com
+quotes.included@funny.domain
+this.one.with.periods@weird.co.in
