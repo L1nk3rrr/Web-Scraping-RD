@@ -8,16 +8,19 @@ import requests
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
+from utils.scrape_ops_fake_agent import get_user_agent_list, get_random_user_agent
+
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s - %(lineno)d -  %(message)s",
 )
 _logger = logging.getLogger(__name__)
 
+USER_AGENT_LIST = get_user_agent_list()
 SITE = "https://www.lejobadequat.com/emplois"
 START_PAGE = 1
 MAX_DEFAULT_PAGES_TO_PARSE = 10
-MAX_THREADS = 16
+MAX_THREADS = 4
 LINK_TAG_PATTERN = re.compile(r"<article[^>]*>(?:.*?\n)*?.*?<a[^>]*\bhref=\"([^\"]*)\"[^>]*\btitle=\"([^\"]*)\"")
 # [^\"]* - to avoid another content after title
 
@@ -52,15 +55,16 @@ def get_default_body(page=START_PAGE):
 
 def post_request(url: str, data: dict):
     result_data = {}
+    headers = {'User-Agent': get_random_user_agent(USER_AGENT_LIST)}
     try:
-        r = requests.post(url, json=data, timeout=(5, 10))
+        response = requests.post(url, json=data, timeout=(5, 10), headers=headers)
     except Exception as e:
         _logger.info(f"Error while parsing page {data['data']['paged']}, {e}")
         return result_data
 
-    if r.status_code == 200:
-        result_data = r.json()
-    _logger.info(f"Status code {r.status_code}, page {data['data']['paged']}")
+    _logger.info(f"Status code {response.status_code}, page {data['data']['paged']}")
+    if response.ok:
+        result_data = response.json()
     return result_data
 
 
