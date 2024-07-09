@@ -1,0 +1,3 @@
+input - Cargo, palavras-chave ou empresa
+input - Cidade, estado, região ou “remoto”
+button - Achar vagas
