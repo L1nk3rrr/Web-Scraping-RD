@@ -1,0 +1,38 @@
+[
+    {
+        "link": "https://www.bbc.com/sport/football/articles/cv2gvqykn5go",
+        "topics": [
+            "UEFA Euro 2024",
+            "Football",
+            "England Men's Football Team"
+        ]
+    },
+    {
+        "link": "https://www.bbc.com/sport/tennis/articles/cldyn7nxwd7o",
+        "topics": [
+            "Tennis"
+        ]
+    },
+    {
+        "link": "https://www.bbc.com/sport/football/articles/cl77p8z5dr9o",
+        "topics": [
+            "Spain",
+            "Barcelona",
+            "UEFA Euro 2024",
+            "Football"
+        ]
+    },
+    {
+        "link": "https://www.bbc.com/sport/cricket/articles/ced39kejvnzo",
+        "topics": [
+            "England Women's Cricket Team",
+            "Cricket"
+        ]
+    },
+    {
+        "link": "https://www.bbc.com/sport/cycling/articles/c3gwd53xzn2o",
+        "topics": [
+            "Cycling"
+        ]
+    }
+]
