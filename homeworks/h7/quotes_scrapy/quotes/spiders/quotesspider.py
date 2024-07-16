@@ -4,6 +4,10 @@ from quotes.items import QuotesItem
 MAX_PAGE = 2
 START_PAGE = 1
 
+QUOTES_XPATH = ".//div[@class='quote']"
+AUTHOR_XPATH = ".//small[@itemprop='author']/text()"
+TEXT_XPATH = ".//span[@class='text']/text()"
+
 
 class QuotesspiderSpider(scrapy.Spider):
     name = "quotesspider"
@@ -27,8 +31,8 @@ class QuotesspiderSpider(scrapy.Spider):
             yield response.follow(next_page_url, callback=self.parse_page)
 
     def parse_page(self, response):
-        quotes = response.xpath(".//div[@class='quote']")
+        quotes = response.xpath(QUOTES_XPATH)
         for quote in quotes:
-            author = quote.xpath(".//small[@itemprop='author']/text()").get()
-            text = quote.xpath(".//span[@class='text']/text()").get()
+            author = quote.xpath(AUTHOR_XPATH).get()
+            text = quote.xpath(TEXT_XPATH).get()
             yield QuotesItem(author=author, text=text)
